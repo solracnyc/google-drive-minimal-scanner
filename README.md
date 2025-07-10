@@ -108,6 +108,13 @@ For large folders, the scanner automatically pauses every 4 minutes and schedule
 - No folders were accessible
 - Run `testFolderAccess()` to diagnose
 
+**"ERROR: Cannot call SpreadsheetApp.getUi() from this context"**
+- **This is NOT a real error!** Your scan completed successfully ✅
+- Happens when large folders trigger automatic continuation
+- The script runs in background mode and can't show the completion popup
+- **Your results are saved** - check the "Empty Folders" tab
+- Look in Debug Log for "Scan complete! Found X empty folders out of Y total"
+
 ### Getting Help
 
 1. **Run `testFolderAccess()`** first to see specific issues
