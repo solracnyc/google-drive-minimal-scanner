@@ -115,6 +115,24 @@ For large folders, the scanner automatically pauses every 4 minutes and schedule
 - **Your results are saved** - check the "Empty Folders" tab
 - Look in Debug Log for "Scan complete! Found X empty folders out of Y total"
 
+**Potential fixes for future development:**
+```javascript
+// Option 1: Check execution context before showing UI
+if (typeof SpreadsheetApp.getUi === 'function') {
+  try {
+    SpreadsheetApp.getUi().alert('Scan Complete', message, SpreadsheetApp.getUi().ButtonSet.OK);
+  } catch (e) {
+    // Silently fail in background mode
+  }
+}
+
+// Option 2: Use toast notifications instead (works in more contexts)
+SpreadsheetApp.getActiveSpreadsheet().toast('Scan complete!', 'Status', 10);
+
+// Option 3: Write completion status to a cell instead of popup
+sheet.getRange('A1').setValue('Scan Status: Complete - ' + new Date());
+```
+
 ### Getting Help
 
 1. **Run `testFolderAccess()`** first to see specific issues
